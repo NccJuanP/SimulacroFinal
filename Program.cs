@@ -1,6 +1,13 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using pdf.Context;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<BaseContext>(options =>
+    options.UseMySql(builder.Configuration.GetConnectionString("Default"), Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.20-mysql")));
+
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
